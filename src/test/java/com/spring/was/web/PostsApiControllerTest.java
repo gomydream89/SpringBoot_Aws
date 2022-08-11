@@ -42,22 +42,24 @@ public class PostsApiControllerTest {
         //given
         String title = "title";
         String content = "content";
-
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder().title(title).content(content).author("김도영").build();
+        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+                .title(title)
+                .content(content)
+                .author("author")
+                .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
 
-        //whenpostForEntity
+        //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //assertThat(responseEntity.getBody()).isGreaterThan(0L);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
-
     }
 
 }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class PostService {
+public class PostsService {
     private final PostsRepository postsRepository;
 
     @Transactional
